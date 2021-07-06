@@ -9,7 +9,12 @@ module.exports = {
         path: resolve(__dirname, 'build') // 文件路径
     },
     module: { // loader配置集
-        rules: []
+        rules: [
+            { // 配置解析css文件
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        ]
     },
     plugins:[
         // 自动化配置：以指定模板创建html文件，并自动引入打包后的js文件

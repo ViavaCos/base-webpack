@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/ViavaCos/base-webpack#readme",
   "devDependencies": {
+    "css-loader": "^5.2.6",
     "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^3.0.0",
     "webpack": "^5.42.1",
     "webpack-cli": "^4.7.2"
   }
