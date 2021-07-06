@@ -6,3 +6,8 @@
   height: @width;
   background-color: @color;
 }
+.test1 {
+  &:extend(.test); // 继承
+  background: url('../media/a.png') no-repeat;
+  background-size: cover;
+}

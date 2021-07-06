@@ -7,7 +7,9 @@ module.exports = {
     entry: './src/js/index.js', // 入口文件
     output: { // 出口文件
         filename: 'js/built.js', // 文件名称
-        path: resolve(__dirname, 'build') // 文件路径
+        path: resolve(__dirname, 'build'), // 文件路径
+        // 【hash:8 --> 哈希值截取前8位】【ext --> 文件扩展名】
+        assetModuleFilename: 'media/[hash:8][ext]' // 资源模块的命名规则(可包含文件路径)
     },
     module: { // loader配置集
         rules: [
@@ -18,6 +20,18 @@ module.exports = {
             { // 配置解析less文件
                 test: /\.less$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+            },
+            { // 配置解析图片资源
+                test: /\.(jpg|jpeg|png|gif)$/,
+                /**
+                 * 资源模块类型
+                 * 1. asset/resource 发送一个单独的文件并导出 URL。之前通过使用 file-loader 实现
+                 * 2. asset/inline 导出一个资源的 data URI。之前通过使用 url-loader 实现
+                 * 3. asset/source 导出资源的源代码。之前通过使用 raw-loader 实现
+                 * 4. asset 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 url-loader，并且配置资源体积限制实现
+                 */
+                // 
+                type: 'asset/resource' // 资源模块类型
             }
         ]
     },
