@@ -15,7 +15,7 @@ module.exports = {
         rules: [
             { // 配置解析css文件
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader'] // 多个loader使用use, 以数组形式配置
             },
             { // 配置解析less文件
                 test: /\.less$/,
@@ -32,6 +32,10 @@ module.exports = {
                  */
                 // 
                 type: 'asset/resource' // 资源模块类型
+            },
+            { // 配置解析html文件中引入的资源 (配置后，引入的文件名将变成打包后文件的名称)
+                test: /\.html$/,
+                loader: 'html-loader' // 多个loader使用loader, 以字符串形式配置
             }
         ]
     },

@@ -3,3 +3,8 @@ body, html {
   padding: 0;
   background-color: lightgreen;
 }
+
+img {
+  max-width: 150px;
+  max-height: 150px;
+}
