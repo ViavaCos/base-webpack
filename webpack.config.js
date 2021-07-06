@@ -1,4 +1,5 @@
-// 使用commonjs的模块化
+// webpack配置文件使用commonjs的模块化
+const { resolve } = require('path') // 引入resolve方法
 
 module.exports = {
     entry: './src/js/index.js', // 入口文件
