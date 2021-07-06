@@ -13,6 +13,10 @@ module.exports = {
             { // 配置解析css文件
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+            { // 配置解析less文件
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader']
             }
         ]
     },
