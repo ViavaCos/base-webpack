@@ -2,6 +2,7 @@
 const { resolve } = require('path') // 引入resolve方法
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
 // 提取css通用配置
 const commonLoader = [
@@ -80,6 +81,12 @@ module.exports = {
             filename: 'css/[name].css' // css文件名称(可以包含文件路径)
         })
     ], // 插件配置集
+    optimization: { // 打包优化配置
+        minimize: true, // 打包优化默认仅在 生产模式 下启用, 若要在 开发模式 也启用，需将此项设置为true
+        minimizer: [
+            new CssMinimizerWebpackPlugin() // 压缩css, 通webpack4使用的optimize-css-assets-webpack-plugin
+        ]
+    },
     mode: 'development' // 打包模式 development-开发模式 production-生产模式
 }
 
