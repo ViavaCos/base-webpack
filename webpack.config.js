@@ -67,11 +67,14 @@ module.exports = {
             },
             { // 配置解析html文件中引入的资源 (配置后，引入的文件名将变成打包后文件的名称)
                 test: /\.html$/,
-                loader: 'html-loader' // 多个loader使用loader, 以字符串形式配置
+                loader: 'html-loader', // 多个loader使用loader, 以字符串形式配置
+                options: {
+                    minimize: true // 压缩 HTML, 生产模式下的默认值是true, 其它模式为false
+                }
             }
         ]
     },
-    plugins:[
+    plugins:[ // 插件配置集
         // 自动化配置：以指定模板创建html文件，并自动引入打包后的js文件
         new HtmlWebpackPlugin({
             template: './src/index.html' // 指定的html模板地址
@@ -80,7 +83,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css' // css文件名称(可以包含文件路径)
         })
-    ], // 插件配置集
+    ],
     optimization: { // 打包优化配置
         minimize: true, // 打包优化默认仅在 生产模式 下启用, 若要在 开发模式 也启用，需将此项设置为true
         minimizer: [
