@@ -3,6 +3,37 @@ const { resolve } = require('path') // 引入resolve方法
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+// 提取css通用配置
+const commonLoader = [
+    MiniCssExtractPlugin.loader,
+    'css-loader',
+    {  // 配置css后处理器，自动处理css兼容性问题(如：添加css前缀等)
+       // 兼容范围会读取package.json中的browserslist里配置的范围 
+       // [官方git地址] https://github.com/browserslist/browserslist
+       /**
+        *   "browserslist": {
+                "development": [
+                    "last 10 chrome versions", // 最近10个chrome版本
+                    "last 10 firefox versions",
+                    "last 10 ie versions"
+                ],
+                "production": [
+                    "> 0.2%", // 大于全球使用统计浏览器的 0.2%
+                    "last 2 versions", // 最近2个浏览器版本
+                    "not dead", // 排除已经死亡的浏览器
+                    "not op_mini all" // 排除所有的Opera mini 浏览器
+                ]
+            }
+        */
+        loader: 'postcss-loader',
+        options: {
+            postcssOptions: {
+                plugins: [['postcss-preset-env']] // postcss预设环境, 会读取环境变量process.env.NODE_ENV的值
+            }
+        }            
+    }
+]
+
 module.exports = {
     entry: './src/js/index.js', // 入口文件
     output: { // 出口文件
@@ -15,11 +46,11 @@ module.exports = {
         rules: [
             { // 配置解析css文件
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'] // 多个loader使用use, 以数组形式配置
+                use: [...commonLoader] // 多个loader使用use, 以数组形式配置
             },
             { // 配置解析less文件
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+                use: [...commonLoader, 'less-loader']
             },
             { // 配置解析图片资源
                 test: /\.(jpg|jpeg|png|gif)$/,
