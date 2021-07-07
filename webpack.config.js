@@ -51,3 +51,15 @@ module.exports = {
     ], // 插件配置集
     mode: 'development' // 打包模式 development-开发模式 production-生产模式
 }
+
+/**
+    todos:
+
+    1. css/html/js 压缩
+    2. css/js兼容性
+    3. js代码规范
+    4. 删除生产环境console/debugger， css/html注释
+    5. 代码分割
+    6. 开发环境优化
+
+ */
