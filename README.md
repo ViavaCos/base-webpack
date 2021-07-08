@@ -5,7 +5,8 @@ webpack5的基本配置 (A base configuration with webpack 5.)
 
 - [x] https://github.com/ViavaCos/base-webpack/commits/main
 
-
+### Gitee 地址
+- [x] https://gitee.com/ViavaCos/base-webpack
 
 ## 使用(Usage)
 
@@ -25,10 +26,9 @@ webpack serve
 
 视频地址：
 
-https://www.bilibili.com/video/BV1e7411j7T5?t=2
-(观前提示，前38讲皆为webpack4内容，适合入门；后2话刚开始webpack5)
+- [x] https://www.bilibili.com/video/BV1e7411j7T5?t=2
+- [x] (观前提示，前38讲皆为webpack4内容，适合入门；后2话刚开始webpack5)
 
-
-https://www.bilibili.com/video/BV1cv411C74F/?spm_id_from=333.788.recommend_more_video.0
-(webpack5后续，我尚未观看)
+- [x] https://www.bilibili.com/video/BV1cv411C74F/?spm_id_from=333.788.recommend_more_video.0
+- [x] (webpack5后续，我尚未观看)
 
