@@ -71,6 +71,26 @@ module.exports = {
                 options: {
                     minimize: true // 压缩 HTML, 生产模式下的默认值是true, 其它模式为false
                 }
+            },
+            { // 配置解析js文件(js编译添加兼容性)
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env'] // 预设环境
+                    // presets: [
+                    //     [
+                    //         '@babel/preset-env',
+                    //         {
+                    //             useBuiltIns: 'entry',
+                    //             targets: {
+                    //                 chrome: "58",
+                    //                 ie: "10"
+                    //             }
+                    //         }
+                    //     ]
+                    // ]
+                }
             }
         ]
     },
