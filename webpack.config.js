@@ -77,7 +77,8 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/preset-env'] // 预设环境
+                    presets: ['@babel/preset-env'], // 预设环境
+                    // plugins: ['@babel/plugin-transform-runtime'],
                     // presets: [
                     //     [
                     //         '@babel/preset-env',
@@ -85,7 +86,8 @@ module.exports = {
                     //             useBuiltIns: 'entry',
                     //             targets: {
                     //                 chrome: "58",
-                    //                 ie: "10"
+                    //                 ie: "8",
+                    //                 "browsers": ["last 2 versions", "ie >= 7"]
                     //             }
                     //         }
                     //     ]

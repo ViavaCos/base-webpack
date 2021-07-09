@@ -1,6 +1,9 @@
 import '../css/index.css'
 import '../css/test.less'
 
+// todo: 寻找更为合适的方案，@babel/plugin-transform-runtime 尝试配置后，似乎未生效。
+import 'babel-polyfill' // 可以将Promise编译为es5的语法(代价：引入巨多的兼容函数;多达几千行)
+
 function add(x, y) {
   return x + y
 }
