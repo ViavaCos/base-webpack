@@ -4,6 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
+// deprecated eslint-loader@4.0.2: This loader has been deprecated. Please use eslint-webpack-plugin
+// eslint-loader已经被抛弃了，改用eslint-webpack-plugin了
+const EslintWebpackPlugin = require('eslint-webpack-plugin')
+
 // 提取css通用配置
 const commonLoader = [
     MiniCssExtractPlugin.loader,
@@ -104,7 +108,9 @@ module.exports = {
         // 拆分css成单独的文件(该插件会为每个包含 CSS 的 JS 文件创建一个 CSS 文件)
         new MiniCssExtractPlugin({
             filename: 'css/[name].css' // css文件名称(可以包含文件路径)
-        })
+        }),
+        // 规范代码风格
+        new EslintWebpackPlugin()
     ],
     optimization: { // 打包优化配置
         minimize: true, // 打包优化默认仅在 生产模式 下启用, 若要在 开发模式 也启用，需将此项设置为true

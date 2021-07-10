@@ -1,0 +1,12 @@
+{
+    "parserOptions": { // 解析配置
+        "ecmaVersion": 6, // es版本 - 6
+        "sourceType": "module" // 资源类型 - 模块 
+    },
+    "rules": {
+        "indent": ["error", 2], // 代码缩进 - 2个空格
+        // "semi": ["error", "always"], // 是否要求代码结尾添加分号 - 总是
+        "quotes": ["error", "single"], // 引号 - 单引号
+        "no-console": "off" // 是否不允许console语句 - 否
+    }
+}

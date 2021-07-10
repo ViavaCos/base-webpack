@@ -20,5 +20,8 @@ const p = new Promise(resollve => {
   resollve(add(6, 6))
 })
 
+// 解开下面这行注释，就可以看到eslint提示你需要使用单引号的报错
+// const str = "Hi"
+
 
 console.log(add(1, 2));
