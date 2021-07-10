@@ -10,3 +10,13 @@
         "no-console": "off" // 是否不允许console语句 - 否
     }
 }
+
+/*
+  如果你用的编辑器是VSCode, 可以打开编辑器的settings.json，
+  然后在里面加上如下配置，以达到保存文件时，自动按照eslint规范自动修改代码风格
+
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+
+*/
