@@ -42,7 +42,7 @@ const commonLoader = [
 module.exports = {
   entry: './src/js/index.js', // 入口文件
   output: { // 出口文件
-    filename: 'js/built.js', // 文件名称
+    filename: 'js/[name].js', // 文件名称
     path: resolve(__dirname, 'build'), // 文件路径
     // 【hash:8 --> 哈希值截取前8位】【ext --> 文件扩展名】
     assetModuleFilename: 'media/[hash:8][ext]' // 资源模块的命名规则(可包含文件路径)
@@ -118,9 +118,20 @@ module.exports = {
   ],
   optimization: { // 打包优化配置
     minimize: true, // 打包优化默认仅在 生产模式 下启用, 若要在 开发模式 也启用，需将此项设置为true
-    minimizer: [
+    minimizer: [ // 配置优化用到的插件
       new CssMinimizerWebpackPlugin() // 压缩css, 通webpack4使用的optimize-css-assets-webpack-plugin
-    ]
+    ],
+    splitChunks: { // 代码分割
+      chunks: 'all', // 设置所分割块的范围(all-所有 async-异步 initial-初始值)
+      // chunks(chunk){ // 也可以通过设置chunks函数来排除某个chunk不做分割
+      //   return chunk.name !== 'my-excluded-chunk'
+      // },
+      minSize: 50 * 1024, // 50kb, 生成chunk的最小体积(单位是bytes)
+      maxSize: 200 * 1024, // bytes  将大于 maxSize 个字节的 chunk 分割成较小的部分,  这些较小的部分在体积上至少为 minSize
+      minChunks: 2, // 拆分前必须共享模块的最小 chunks 数 (也就是这个包被引用的次数必须超过设置的值)
+      maxAsyncRequests: 30, // 按需加载时的最大并行请求数
+      hidePathInfo: false, // 阻止公开chunk路径信息
+    }
   },
   devServer: { // 开发环境服务器配置
     contentBase: resolve(__dirname, 'build'), // 编译后文件位置
