@@ -103,7 +103,11 @@ module.exports = {
   plugins:[ // 插件配置集
     // 自动化配置：以指定模板创建html文件，并自动引入打包后的js文件
     new HtmlWebpackPlugin({
-      template: './src/index.html' // 指定的html模板地址
+      template: './src/index.html', // 指定的html模板地址
+      minify: {
+        collapseWhitespace: true, // 折叠(去掉)空格
+        // removeComments: true // 移除页面注释(html/js注释), 这项不配置也会移除
+      }
     }),
     // 拆分css成单独的文件(该插件会为每个包含 CSS 的 JS 文件创建一个 CSS 文件)
     new MiniCssExtractPlugin({
