@@ -137,7 +137,8 @@ module.exports = {
     contentBase: resolve(__dirname, 'build'), // 编译后文件位置
     compress: true, // 开启gzip压缩
     port: 5555, // 端口号
-    open: true // 是否自动打开浏览器
+    open: true, // 是否自动打开浏览器
+    hot: true // 开启热更新(Hot Module Replacement)
   },
   mode: 'development' // 打包模式 development-开发模式 production-生产模式
 }
