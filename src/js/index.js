@@ -1,6 +1,8 @@
 import '../css/index.css'
 import '../css/test.less'
 
+import { cube } from './math.js'
+
 // 充实一下js文件体积， 好多分出来一个chunk
 import './large-js-file.js'
 
@@ -28,3 +30,15 @@ const p = new Promise(resollve => {
 
 
 console.log(add(1, 2));
+
+function component(){
+  const element = document.createElement('pre')
+  element.innerHTML = [
+    'Hi, webpack!',
+    '3 的立方是',
+    cube(3)
+  ].join('\n\n')
+
+  return element
+}
+document.body.appendChild(component())

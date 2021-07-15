@@ -54,5 +54,6 @@
       "not dead",
       "not op_mini all"
     ]
-  }
+  },
+  "sideEffects": ["*css", "*.less", "./src/js/large-js-file.js"]
 }

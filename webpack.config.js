@@ -131,7 +131,17 @@ module.exports = {
       minChunks: 2, // 拆分前必须共享模块的最小 chunks 数 (也就是这个包被引用的次数必须超过设置的值)
       maxAsyncRequests: 30, // 按需加载时的最大并行请求数
       hidePathInfo: false, // 阻止公开chunk路径信息
-    }
+    },
+    /*
+      1. tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)
+      2. 可以在package.json中配置哪些文件是有副作用的(不可以直接删除的)
+         这样在进行tree-sharking的时候会跳过这些文件(打包速度就更快一些了)
+         例如："sideEffects": ["*css", "*.less", "./src/js/large-js-file.js"]
+      3. 如果所有的都是无副作用的代码，直接配置值为false就行
+      4. 详情请看官网：https://webpack.docschina.org/guides/tree-shaking/#root
+      5. 将mode设置为"production"将会自动开启tree-sharking并自动删除掉这些未引用的代码
+    */
+    usedExports: true // 开启tree-sharking， 不过仅仅只是会找出哪些代码是为被引用的，还需要额外配置(比如:terser插件)才可以删除无用代码
   },
   devServer: { // 开发环境服务器配置
     contentBase: resolve(__dirname, 'build'), // 编译后文件位置
