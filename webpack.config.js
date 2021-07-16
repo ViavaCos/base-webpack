@@ -3,6 +3,7 @@ const { resolve } = require('path') // 引入resolve方法
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 // deprecated eslint-loader@4.0.2: This loader has been deprecated. Please use eslint-webpack-plugin
 // eslint-loader已经被抛弃了，改用eslint-webpack-plugin了
@@ -119,9 +120,10 @@ module.exports = {
   optimization: { // 打包优化配置
     minimize: true, // 打包优化默认仅在 生产模式 下启用, 若要在 开发模式 也启用，需将此项设置为true
     // TODO 2021-7-15 20:33:12 配置了minimizer后，生产模式js也不给压缩了，tree-sharking也不自动开启了？？？
-    // minimizer: [ // 配置优化用到的插件
-    //   new CssMinimizerWebpackPlugin() // 压缩css, 通webpack4使用的optimize-css-assets-webpack-plugin
-    // ],
+    minimizer: [ // 配置优化用到的插件
+      new CssMinimizerWebpackPlugin(), // 压缩css, 通webpack4使用的optimize-css-assets-webpack-plugin
+      new TerserPlugin() // 压缩js, 自动删除未引用的代码( webpack v5 或以上版本不需要安装，自带最新的 )
+    ],
     splitChunks: { // 代码分割
       chunks: 'all', // 设置所分割块的范围(all-所有 async-异步 initial-初始值)
       // chunks(chunk){ // 也可以通过设置chunks函数来排除某个chunk不做分割
@@ -142,7 +144,7 @@ module.exports = {
       4. 详情请看官网：https://webpack.docschina.org/guides/tree-shaking/#root
       5. 将mode设置为"production"将会自动开启tree-sharking并自动删除掉这些未引用的代码
     */
-    // usedExports: true // 开启tree-sharking， 不过仅仅只是会找出哪些代码是为被引用的，还需要额外配置(比如:terser插件)才可以删除无用代码
+    usedExports: true // 开启tree-sharking， 不过仅仅只是会找出哪些代码是为被引用的，还需要额外配置(比如:terser插件)才可以删除无用代码
   },
   devServer: { // 开发环境服务器配置
     contentBase: resolve(__dirname, 'build'), // 编译后文件位置
