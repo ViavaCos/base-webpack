@@ -153,6 +153,40 @@ module.exports = {
     open: true, // 是否自动打开浏览器
     hot: true // 开启热更新(Hot Module Replacement)
   },
+  /*
+    source-map:
+    一种将源代码和构建后的代码建立映射关系的技术,当构建后代码报错了，可以追踪到源代码中报错的位置
+
+    source-map的种类有很多，不同的类型侧重点不同，看具体是侧重源代码位置信息还是构建速度还是错误代码信息
+    内联的类型构建速度比较快。
+    比如:
+    source-map: 生成单独的source-map文件 [有错误代码信息和源代码位置]
+    evel-source-map: 内联，每个evel后都会有一段source-map代码
+    hidden-source-map：会生成一个单独的source-map文件 [错误代码信息和原因，无源代码位置]
+    inline-source-map: source-map代码内联，在文件最后面会有一大坨source-map代码 [代码错误信息准确，但是源代码位置错误]
+    ...
+
+    开发环境：要求速度快，调试友好
+      ①速度快:(evel > inline > cheap ...)
+      evel-cheap-source-map
+      evel-source-map
+      ②调试更友好:
+      source-map
+      cheap-module-source-map
+      cheap-source-map
+      (cheap-source-map和module-source-map的区别是，后者会将loader的source-map也加进来，前者不会)
+
+      *建议开发环境可以使用：evel-source-map 或者 evel-cheap-module-source-map
+
+    生产环境：是否要考虑源代码是否隐藏，是否要考虑更友好的调试。
+      由于内联类型的source-map会让代码体积变大，所以不建议在生成中使用
+      ①隐藏源代码
+      nosources-source-map: 全部隐藏
+      hidden-source-map: 只隐藏源代码，会提示构建后代码报错信息
+
+      *建议生成环境可以使用：source-map 或者 cheap-module-source-map
+  */
+  devtool: 'source-map', // 开启source-map, 可选值为上述所讲的各个种类等等
   mode: 'production' // 打包模式 development-开发模式 production-生产模式
 }
 

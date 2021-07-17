@@ -28,6 +28,8 @@ const p = new Promise(resollve => {
 // 解开下面这行注释，就可以看到eslint提示你需要使用单引号的报错
 // const str = "Hi"
 
+// 下面这行代码会报错
+console.log(text());
 
 console.log(add(1, 2));
 
