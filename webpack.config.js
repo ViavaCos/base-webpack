@@ -50,54 +50,63 @@ module.exports = {
   },
   module: { // loader配置集
     rules: [
-      { // 配置解析css文件
-        test: /\.css$/,
-        use: [...commonLoader] // 多个loader使用use, 以数组形式配置
-      },
-      { // 配置解析less文件
-        test: /\.less$/,
-        use: [...commonLoader, 'less-loader']
-      },
-      { // 配置解析图片资源
-        test: /\.(jpg|jpeg|png|gif)$/,
+      {
         /**
-                 * 资源模块类型
-                 * 1. asset/resource 发送一个单独的文件并导出 URL。之前通过使用 file-loader 实现
-                 * 2. asset/inline 导出一个资源的 data URI。之前通过使用 url-loader 实现
-                 * 3. asset/source 导出资源的源代码。之前通过使用 raw-loader 实现
-                 * 4. asset 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 url-loader，并且配置资源体积限制实现
-                 */
-        // 
-        type: 'asset/resource' // 资源模块类型
-      },
-      { // 配置解析html文件中引入的资源 (配置后，引入的文件名将变成打包后文件的名称)
-        test: /\.html$/,
-        loader: 'html-loader', // 多个loader使用loader, 以字符串形式配置
-        options: {
-          minimize: true // 压缩 HTML, 生产模式下的默认值是true, 其它模式为false
-        }
-      },
-      { // 配置解析js文件(js编译添加兼容性)
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'], // 预设环境
-          // plugins: ['@babel/plugin-transform-runtime'],
-          // presets: [
-          //     [
-          //         '@babel/preset-env',
-          //         {
-          //             useBuiltIns: 'entry',
-          //             targets: {
-          //                 chrome: "58",
-          //                 ie: "8",
-          //                 "browsers": ["last 2 versions", "ie >= 7"]
-          //             }
-          //         }
-          //     ]
-          // ]
-        }
+         * oneOf优化
+         * oneOf中的loader只会执行一次(即一但找到匹配的就不会向后继续匹配了)
+         * 因此，oneOf中不能存在多个loader处理同一种文件的情况，如果有，那么需要写在oneOf外面
+         */
+        oneOf: [
+          { // 配置解析css文件
+            test: /\.css$/,
+            use: [...commonLoader] // 多个loader使用use, 以数组形式配置
+          },
+          { // 配置解析less文件
+            test: /\.less$/,
+            use: [...commonLoader, 'less-loader']
+          },
+          { // 配置解析图片资源
+            test: /\.(jpg|jpeg|png|gif)$/,
+            /**
+                     * 资源模块类型
+                     * 1. asset/resource 发送一个单独的文件并导出 URL。之前通过使用 file-loader 实现
+                     * 2. asset/inline 导出一个资源的 data URI。之前通过使用 url-loader 实现
+                     * 3. asset/source 导出资源的源代码。之前通过使用 raw-loader 实现
+                     * 4. asset 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 url-loader，并且配置资源体积限制实现
+                     */
+            // 
+            type: 'asset/resource' // 资源模块类型
+          },
+          { // 配置解析html文件中引入的资源 (配置后，引入的文件名将变成打包后文件的名称)
+            test: /\.html$/,
+            loader: 'html-loader', // 多个loader使用loader, 以字符串形式配置
+            options: {
+              minimize: true // 压缩 HTML, 生产模式下的默认值是true, 其它模式为false
+            }
+          },
+          { // 配置解析js文件(js编译添加兼容性)
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'], // 预设环境
+              // plugins: ['@babel/plugin-transform-runtime'],
+              // presets: [
+              //     [
+              //         '@babel/preset-env',
+              //         {
+              //             useBuiltIns: 'entry',
+              //             targets: {
+              //                 chrome: "58",
+              //                 ie: "8",
+              //                 "browsers": ["last 2 versions", "ie >= 7"]
+              //             }
+              //         }
+              //     ]
+              // ]
+            }
+          }
+        ]
       }
     ]
   },
