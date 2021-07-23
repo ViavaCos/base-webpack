@@ -68,12 +68,12 @@ module.exports = {
           { // 配置解析图片资源
             test: /\.(jpg|jpeg|png|gif)$/,
             /**
-                     * 资源模块类型
-                     * 1. asset/resource 发送一个单独的文件并导出 URL。之前通过使用 file-loader 实现
-                     * 2. asset/inline 导出一个资源的 data URI。之前通过使用 url-loader 实现
-                     * 3. asset/source 导出资源的源代码。之前通过使用 raw-loader 实现
-                     * 4. asset 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 url-loader，并且配置资源体积限制实现
-                     */
+             * 资源模块类型
+             * 1. asset/resource 发送一个单独的文件并导出 URL。之前通过使用 file-loader 实现
+             * 2. asset/inline 导出一个资源的 data URI。之前通过使用 url-loader 实现
+             * 3. asset/source 导出资源的源代码。之前通过使用 raw-loader 实现
+             * 4. asset 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 url-loader，并且配置资源体积限制实现
+             */
             // 
             type: 'asset/resource' // 资源模块类型
           },
@@ -128,7 +128,8 @@ module.exports = {
   ],
   optimization: { // 打包优化配置
     minimize: true, // 打包优化默认仅在 生产模式 下启用, 若要在 开发模式 也启用，需将此项设置为true
-    // TODO 2021-7-15 20:33:12 配置了minimizer后，生产模式js也不给压缩了，tree-sharking也不自动开启了？？？
+    // 2021-7-15 20:33:12 配置了minimizer后，生产模式js也不给压缩了，tree-sharking也不自动开启了？？？
+    // 应该是因为minimizer配置覆盖了默认配置，所以不压缩也不tree-sharking了
     minimizer: [ // 配置优化用到的插件
       new CssMinimizerWebpackPlugin(), // 压缩css, 通webpack4使用的optimize-css-assets-webpack-plugin
       new TerserPlugin() // 压缩js, 自动删除未引用的代码( webpack v5 或以上版本不需要安装，自带最新的 )
@@ -147,8 +148,8 @@ module.exports = {
     /*
       1. tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)
       2. 可以在package.json中配置哪些文件是有副作用的(不可以直接删除的)
-         这样在进行tree-sharking的时候会跳过这些文件(打包速度就更快一些了)
-         例如："sideEffects": ["*css", "*.less", "./src/js/large-js-file.js"]
+        这样在进行tree-sharking的时候会跳过这些文件(打包速度就更快一些了)
+        例如："sideEffects": ["*css", "*.less", "./src/js/large-js-file.js"]
       3. 如果所有的都是无副作用的代码，直接配置值为false就行
       4. 详情请看官网：https://webpack.docschina.org/guides/tree-shaking/#root
       5. 将mode设置为"production"将会自动开启tree-sharking并自动删除掉这些未引用的代码
@@ -193,20 +194,19 @@ module.exports = {
       nosources-source-map: 全部隐藏
       hidden-source-map: 只隐藏源代码，会提示构建后代码报错信息
 
-      *建议生成环境可以使用：source-map 或者 cheap-module-source-map
+      *建议生产环境可以使用：source-map 或者 cheap-module-source-map
   */
   devtool: 'source-map', // 开启source-map, 可选值为上述所讲的各个种类等等
   mode: 'production' // 打包模式 development-开发模式 production-生产模式
 }
 
 /**
-    todos:
+  todos:
 
-    1. css/html/js 压缩
-    2. css/js兼容性
-    3. js代码规范
-    4. 删除生产环境console/debugger， css/html注释
-    5. 代码分割
-    6. 开发环境优化
-
+  1. css/html/js 压缩
+  2. css/js兼容性
+  3. js代码规范
+  4. 删除生产环境console/debugger， css/html注释
+  5. 代码分割
+  6. 开发环境优化
  */
