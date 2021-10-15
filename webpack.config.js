@@ -46,7 +46,15 @@ module.exports = {
     filename: 'js/[name].js', // 文件名称
     path: resolve(__dirname, 'build'), // 文件路径
     // 【hash:8 --> 哈希值截取前8位】【ext --> 文件扩展名】
-    assetModuleFilename: 'media/[hash:8][ext]' // 资源模块的命名规则(可包含文件路径)
+    assetModuleFilename: 'media/[hash:8][ext]', // 资源模块的命名规则(可包含文件路径)
+    environment: { // 配置环境
+      /*
+       * 不使用箭头函数
+       * 打包后webpack会使用一个箭头函数包裹代码，防止变量命名重复
+       * 但是IE浏览器是不支持箭头函数的，所以可以通过arrowFunction设置
+       */
+      arrowFunction: false
+    }
   },
   module: { // loader配置集
     rules: [
